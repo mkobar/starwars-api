@@ -1,10 +1,11 @@
 package org.acme;
 
-import io.quarkus.runtime.Quarkus;
+import io.quarkus.runtime.StartupEvent;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 import org.jboss.logging.Logger;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
 import io.quarkus.scheduler.Scheduled;
 
@@ -18,18 +19,18 @@ public class ApiCallerScheduler {
     @Inject
     Logger logger;
 
-    // Run the API calls once on startup and exit
+    // Run the API calls once on startup
     @Scheduled(every = "5m", delayed = "0s") // Run immediately on startup
-    void callApiOnceAndExit() {
-        logger.info("Running API calls once on startup and exiting...");
+    void callApiOnce() {
+        logger.info("Running API calls once on startup...");
         callApi();
-        Quarkus.asyncExit(); // Exit Quarkus after the task is complete
     }
 
     private void callApi() {
         try {
             // Example: Get all people
             PeopleResponse peopleResponse = peopleClient.getPeople();
+//            logger.info("People: " + peopleResponse.results);
             if (peopleResponse != null && peopleResponse.results != null) {
                 logger.info("People:");
                 for (Person person : peopleResponse.results) {

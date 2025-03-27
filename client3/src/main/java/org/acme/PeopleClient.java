@@ -12,7 +12,8 @@ import java.util.List;
 //@RegisterRestClient(baseUri = "http://localhost:8080/people") // Adjust base URI if needed
 //wiremock
 // @RegisterRestClient(baseUri = "http://localhost:8082/people") // Adjust base URI if needed
-@RegisterRestClient(baseUri = "https://swapi.dev/api/people") // Adjust base URI if needed
+//@RegisterRestClient(baseUri = "https://swapi.dev/api/people") // Adjust base URI if needed
+@RegisterRestClient
 public interface PeopleClient {
 
     @GET
