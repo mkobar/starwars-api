@@ -10,8 +10,9 @@ import java.util.List;
  * REST Client interface to access the PeopleResource.
  */
 //@RegisterRestClient(baseUri = "http://localhost:8080/people") // Adjust base URI if needed
-@RegisterRestClient(baseUri = "http://localhost:8082/people") // Adjust base URI if needed
-//@RegisterRestClient(baseUri = "https://swapi.dev/api/people") // Adjust base URI if needed
+//wiremock
+// @RegisterRestClient(baseUri = "http://localhost:8082/people") // Adjust base URI if needed
+@RegisterRestClient(baseUri = "https://swapi.dev/api/people") // Adjust base URI if needed
 public interface PeopleClient {
 
     @GET

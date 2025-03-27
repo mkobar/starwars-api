@@ -1,0 +1,48 @@
+package org.acme;
+
+import io.quarkus.runtime.Quarkus;
+import io.quarkus.runtime.QuarkusApplication;
+import io.quarkus.runtime.annotations.QuarkusMain;
+import org.eclipse.microprofile.rest.client.inject.RestClient;
+
+import jakarta.inject.Inject;
+
+@QuarkusMain
+public class Main {
+
+    public static void main(String... args) {
+        Quarkus.run(MyApp.class, args);
+    }
+
+    public static class MyApp implements QuarkusApplication {
+
+        @Inject
+        @RestClient
+        PeopleClient peopleClient;
+
+        @Override
+        public int run(String... args) throws Exception {
+
+            try {
+                // Example: Get all people
+                PeopleResponse peopleResponse = peopleClient.getPeople();
+                System.out.println("People: " + peopleResponse.results);
+
+                // Example: Add a new person
+//                Person newPerson = new Person("New Person", "180", "80", "brown", "fair", "blue", "20BBY", "male");
+//                Person addedPerson = peopleClient.addPerson(newPerson);
+//                System.out.println("Added Person: " + addedPerson);
+
+                // Example: Update a person
+//                Person updatePerson = new Person("Luke Skywalker", "185", "85", "brown", "fair", "blue", "19BBY", "male");
+//                Person updatedPerson = peopleClient.updatePerson(updatePerson);
+//                System.out.println("Updated Person: " + updatedPerson);
+            } catch (Exception e) {
+                System.err.println("Error calling API: " + e.getMessage());
+                e.printStackTrace();
+            }
+
+            return 0; // Exit code 0 (success)
+        }
+    }
+}
