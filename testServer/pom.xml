@@ -64,7 +64,7 @@
             <artifactId>quarkus-resteasy-jackson</artifactId>
         </dependency>
 
-        <!--        <dependency>-->
+<!--        <dependency>-->
 <!--            <groupId>io.quarkus</groupId>-->
 <!--            <artifactId>quarkus-rest</artifactId>-->
 <!--        </dependency>-->

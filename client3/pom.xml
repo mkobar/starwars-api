@@ -2,8 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.acme</groupId>
-    <artifactId>client2</artifactId>
+    <artifactId>client3</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <compiler-plugin.version>3.14.0</compiler-plugin.version>
@@ -13,7 +14,6 @@
         <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
         <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
         <quarkus.platform.version>3.21.0</quarkus.platform.version>
-<!--        <quarkus.platform.version>3.7.1</quarkus.platform.version>-->
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.5.2</surefire-plugin.version>
     </properties>
@@ -31,27 +31,20 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- RESTEasy for JAX-RS support -->
-        <dependency>
-            <groupId>io.quarkus</groupId>
-<!--            <artifactId>quarkus-resteasy</artifactId>-->
-            <artifactId>quarkus-resteasy</artifactId>
-<!--            <artifactId>quarkus-resteasy-reactive</artifactId>-->
-        </dependency>
-
-        <!-- MicroProfile REST Client -->
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-client</artifactId>
-<!--            <artifactId>quarkus-rest-client-reactive</artifactId>-->
-        </dependency>
-
         <!-- CDI support -->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-arc</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-jackson</artifactId>
+        </dependency>
+        <!-- MicroProfile REST Client -->
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-resteasy-client-jackson</artifactId>
+        </dependency>
         <!-- Logging via JBoss Logging -->
         <dependency>
             <groupId>org.jboss.logging</groupId>
@@ -63,24 +56,6 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-smallrye-openapi</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>io.quarkus</groupId>
-<!--            <artifactId>quarkus-resteasy-jsonb</artifactId>-->
-            <artifactId>quarkus-resteasy-client-jsonb</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.quarkus</groupId>
-<!--            <artifactId>quarkus-resteasy-reactive-jackson</artifactId>-->
-<!--            <artifactId>quarkus-resteasy-jackson</artifactId>-->
-            <artifactId>quarkus-resteasy-client-jackson</artifactId>
-        </dependency>
-
-<!--        <dependency>-->
-<!--            <groupId>io.quarkus</groupId>-->
-<!--            <artifactId>quarkus-rest</artifactId>-->
-<!--        </dependency>-->
 
         <!-- Testing dependencies -->
         <dependency>
@@ -94,18 +69,32 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-<!--            <groupId>org.mockito</groupId>-->
             <groupId>io.quarkus</groupId>
-<!--            <artifactId>mockito-junit-jupiter</artifactId>-->
             <artifactId>quarkus-junit5-mockito</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
+<!--            <groupId>com.github.tomakehurst</groupId>-->
             <groupId>org.wiremock</groupId>
+<!--            <artifactId>wiremock-standalone</artifactId>-->
             <artifactId>wiremock</artifactId>
+<!--            <version>3.4.1</version>-->
             <version>3.12.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.26.3</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--        <dependency>-->
+<!--            <groupId>org.wiremock</groupId>-->
+<!--            <artifactId>wiremock</artifactId>-->
+<!--            <version>3.12.1</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>

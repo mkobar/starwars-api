@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/clientGemini/client2 (1).iml" filepath="$PROJECT_DIR$/clientGemini/client2 (1).iml" />
       <module fileurl="file://$PROJECT_DIR$/testServer/src/main/main.iml" filepath="$PROJECT_DIR$/testServer/src/main/main.iml" />
       <module fileurl="file://$PROJECT_DIR$/client2/src/main/main2.iml" filepath="$PROJECT_DIR$/client2/src/main/main2.iml" />
       <module fileurl="file://$PROJECT_DIR$/starwars-api.iml" filepath="$PROJECT_DIR$/starwars-api.iml" />

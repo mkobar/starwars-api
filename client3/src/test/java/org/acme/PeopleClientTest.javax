@@ -1,0 +1,108 @@
+package org.acme;
+
+import io.quarkus.test.junit.QuarkusTest;
+import io.restassured.http.ContentType;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.is;
+
+@QuarkusTest
+public class PeopleClientTest {
+
+    @Test
+    public void testGetPeople() {
+        given()
+                .when().get("/client/people")
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("count", is(2))
+                .body("results[0].name", is("Luke Skywalker"));
+    }
+
+    @Disabled
+    @Test
+    public void testAddPerson() {
+        String personJson = "{\"name\": \"Leia Organa\", \"height\": \"150\"}";
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(personJson)
+                .when().post("/people")
+                .then()
+                .statusCode(201)
+                .contentType(ContentType.JSON)
+                .body("name", is("Leia Organa"))
+                .body("height", is("150"));
+    }
+
+    @Disabled
+    @Test
+    public void testAddPersonBadRequest() {
+        String personJson = "{\"height\": \"150\"}";
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(personJson)
+                .when().post("/people")
+                .then()
+                .statusCode(400);
+    }
+
+    @Disabled
+    @Test
+    public void testAddPersonConflict() {
+        String personJson = "{\"name\": \"Luke Skywalker\", \"height\": \"172\"}";
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(personJson)
+                .when().post("/people")
+                .then()
+                .statusCode(409);
+    }
+
+    @Disabled
+    @Test
+    public void testUpdatePerson() {
+        String personJson = "{\"name\": \"Luke Skywalker\", \"height\": \"180\"}";
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(personJson)
+                .when().put("/people")
+                .then()
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("name", is("Luke Skywalker"))
+                .body("height", is("180"));
+    }
+
+    @Disabled
+    @Test
+    public void testUpdatePersonBadRequest() {
+        String personJson = "{\"height\": \"180\"}";
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(personJson)
+                .when().put("/people")
+                .then()
+                .statusCode(400);
+    }
+
+    @Disabled
+    @Test
+    public void testUpdatePersonNotFound() {
+        String personJson = "{\"name\": \"Nonexistent Person\", \"height\": \"180\"}";
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(personJson)
+                .when().put("/people")
+                .then()
+                .statusCode(404);
+    }
+}
