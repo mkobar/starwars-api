@@ -59,13 +59,14 @@ public class ApiCallerScheduler {
 
             if (useLiveSwapi.equalsIgnoreCase("false")) {
                 // Example: Add a new person
-                Person newPerson = new Person("Scheduled Person", "180", "80", "brown",
-                        "fair", "blue", "20BBY", "male", "homeworld",
+                Person newPerson = new Person("Leia Organa", "150", "80", "brown",
+                        "fair", "blue", "20BBY", "female", "homeworld",
                         emptyList, emptyList, emptyList, emptyList, "created", "edited", "url");
-                Person addedPerson = peopleClient.addPerson(newPerson);
+                try {
+                    Person addedPerson = peopleClient.addPerson(newPerson);
 //                logger.info("Added Person: " + addedPerson);
-                if (addedPerson != null ) {
-                    logger.info("Added Person:");
+                    if (addedPerson != null) {
+                        logger.info("Added Person:");
                         logger.info("  Name: " + addedPerson.name);
                         logger.info("  Height: " + addedPerson.height);
                         logger.info("  Mass: " + addedPerson.mass);
@@ -75,29 +76,43 @@ public class ApiCallerScheduler {
                         logger.info("  Birth Year: " + addedPerson.birth_year);
                         logger.info("  Gender: " + addedPerson.gender);
                         logger.info("  ------------------");
-                } else {
+                    } else {
+                        logger.info("No person added.");
+                    }
+                } catch (Exception e) {
+                    //logger.error("No person added error occurred: {}", e.getMessage());
+                    // or logger.error("An error occured", e) to log the stack trace.
                     logger.info("No person added.");
+                    System.out.println("Exception: " + e.toString());
                 }
-
                 // Example: Update a person
                 Person updatePerson = new Person("Luke Skywalker", "185", "85", "brown",
                         "fair", "blue", "19BBY", "male", "homeworld",
                         emptyList, emptyList, emptyList, emptyList, "created", "edited", "url");
-                Person updatedPerson = peopleClient.updatePerson(updatePerson);
+                // use the below for 404 testing with test server
+//                Person updatePerson = new Person("uke Skywalker", "185", "85", "brown",
+//                        "fair", "blue", "19BBY", "male", "homeworld",
+//                        emptyList, emptyList, emptyList, emptyList, "created", "edited", "url");
+                try {
+                    Person updatedPerson = peopleClient.updatePerson(updatePerson);
 //                logger.info("Updated Person: " + updatedPerson);
-                if (updatedPerson != null ) {
-                    logger.info("Updated Person:");
-                    logger.info("  Name: " + updatedPerson.name);
-                    logger.info("  Height: " + updatedPerson.height);
-                    logger.info("  Mass: " + updatedPerson.mass);
-                    logger.info("  Hair Color: " + updatedPerson.hair_color);
-                    logger.info("  Skin Color: " + updatedPerson.skin_color);
-                    logger.info("  Eye Color: " + updatedPerson.eye_color);
-                    logger.info("  Birth Year: " + updatedPerson.birth_year);
-                    logger.info("  Gender: " + updatedPerson.gender);
-                    logger.info("  ------------------");
-                } else {
+                    if (updatedPerson != null) {
+                        logger.info("Updated Person:");
+                        logger.info("  Name: " + updatedPerson.name);
+                        logger.info("  Height: " + updatedPerson.height);
+                        logger.info("  Mass: " + updatedPerson.mass);
+                        logger.info("  Hair Color: " + updatedPerson.hair_color);
+                        logger.info("  Skin Color: " + updatedPerson.skin_color);
+                        logger.info("  Eye Color: " + updatedPerson.eye_color);
+                        logger.info("  Birth Year: " + updatedPerson.birth_year);
+                        logger.info("  Gender: " + updatedPerson.gender);
+                        logger.info("  ------------------");
+                    } else {
+                        logger.info("No person updated.");
+                    }
+                } catch (Exception e) {
                     logger.info("No person updated.");
+                    System.out.println("Exception: " + e.toString());
                 }
             }
         } catch (Exception e) {
