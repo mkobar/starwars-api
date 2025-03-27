@@ -42,6 +42,7 @@ public class PeopleResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public PeopleResponse getPeople() {
+        System.out.println("GET getPeople");
         PeopleResponse response = new PeopleResponse();
         List<Person> persons = new ArrayList<>(peopleStore.values());
         response.count = persons.size();
@@ -61,6 +62,7 @@ public class PeopleResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addPerson(Person person) {
+        System.out.println("POST addPerson");
         if (person == null || person.name == null || person.name.trim().isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST)
                            .entity("Person name is required")
@@ -87,6 +89,7 @@ public class PeopleResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updatePerson(Person person) {
+        System.out.println("PUT updatePerson");
         if (person == null || person.name == null || person.name.trim().isEmpty()) {
             return Response.status(Response.Status.BAD_REQUEST)
                            .entity("Person name is required for update")

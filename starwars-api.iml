@@ -18,5 +18,8 @@
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-core:3.21.0" level="project" />
     <orderEntry type="library" name="Maven: jakarta.enterprise:jakarta.enterprise.cdi-api:4.1.0" level="project" />
     <orderEntry type="library" name="Maven: io.quarkus:quarkus-scheduler-api:3.21.0" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-sec-dispatcher:2.0" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.microprofile.config:microprofile-config-api:3.1" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.validation:jakarta.validation-api:3.0.2" level="project" />
   </component>
 </module>
