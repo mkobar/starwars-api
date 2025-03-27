@@ -34,6 +34,13 @@ public class WireMockPeopleResource implements QuarkusTestResourceLifecycleManag
                         .withBody("{\"name\": \"Leia Organa\", \"height\": \"150\"}")));
 
         // POST 400 bad request - missing name
+        wireMockServer.stubFor(post(urlEqualTo("/people"))
+                //.withRequestBody(matchingJsonPath("$.name"))
+                //.withRequestBody(notContaining("name"))
+                //.withRequestBody(notContaining("\"name\""))
+                .withRequestBody(equalToJson("{ \"name\": null }", true, true))
+                .willReturn(aResponse()
+                        .withStatus(400)));
 
         // POST 409 conflict
         wireMockServer.stubFor(post(urlEqualTo("/people"))
@@ -53,10 +60,16 @@ public class WireMockPeopleResource implements QuarkusTestResourceLifecycleManag
                         .withBody("{\"name\": \"Luke Skywalker\", \"height\": \"180\"}")));
 
         // PUT 400 bad request - missing name
+        wireMockServer.stubFor(put(urlEqualTo("/people"))
+//                .withRequestBody(matchingJsonPath("$.name"))
+                .withRequestBody(equalToJson("{ \"name\": null }", true, true))
+                .willReturn(aResponse()
+                        .withStatus(400)));
 
         // PUT 404 not found
         wireMockServer.stubFor(put(urlEqualTo("/people"))
-                .withRequestBody(equalToJson("{ \"name\":  \"Nonexistent Person\"  }", true, true))
+                //.withRequestBody(equalToJson("{ \"name\":  \"Nonexistent Person\"  }", true, true))
+                .withRequestBody(containing("Nonexistent Person"))
                 .willReturn(aResponse()
                         .withHeader("Content-Type", "application/json")
                         .withStatus(404)));

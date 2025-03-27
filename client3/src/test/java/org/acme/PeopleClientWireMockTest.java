@@ -82,12 +82,12 @@ public class PeopleClientWireMockTest {
                 .body("height", is("150"));
     }
 
-    @Disabled
+    //@Disabled
     @Test
     public void testAddPersonBadRequestWireMock() {
-        wireMockServer.stubFor(post(urlEqualTo("/people"))
-                .willReturn(aResponse()
-                        .withStatus(400)));
+//        wireMockServer.stubFor(post(urlEqualTo("/people"))
+//                .willReturn(aResponse()
+//                        .withStatus(400)));
 
         String personJson = "{\"height\": \"150\"}";
 
@@ -140,12 +140,13 @@ public class PeopleClientWireMockTest {
                 .body("height", is("180"));
     }
 
-    @Disabled
+    //@Disabled
     @Test
     public void testUpdatePersonBadRequestWireMock() {
-        wireMockServer.stubFor(put(urlEqualTo("/people"))
-                .willReturn(aResponse()
-                        .withStatus(400)));
+//        wireMockServer.stubFor(put(urlEqualTo("/people"))
+//                .withRequestBody(matchingJsonPath("$.name"))
+//                .willReturn(aResponse()
+//                        .withStatus(400)));
 
         String personJson = "{\"height\": \"180\"}";
 
